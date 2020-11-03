@@ -44,6 +44,8 @@ static FlutterError* getFlutterError(NSError* error) {
       }
     } else if ([@"getLibraryDirectory" isEqualToString:call.method]) {
       result([self getLibraryDirectory]);
+    } else if ([@"getDownloadsDirectory" isEqualToString:call.method]) {
+      result([self getDownloadsDirectory]);
     } else {
       result(FlutterMethodNotImplemented);
     }
@@ -64,6 +66,11 @@ static FlutterError* getFlutterError(NSError* error) {
 
 + (NSString*)getLibraryDirectory {
   return GetDirectoryOfType(NSLibraryDirectory);
+}
+
+- (NSString*)getDownloadsDirectory {
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
+  return paths.firstObject;
 }
 
 @end
