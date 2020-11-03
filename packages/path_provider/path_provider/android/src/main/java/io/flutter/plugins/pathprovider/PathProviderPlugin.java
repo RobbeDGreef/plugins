@@ -109,6 +109,8 @@ public class PathProviderPlugin implements FlutterPlugin, MethodCallHandler {
       case "getApplicationSupportDirectory":
         executeInBackground(() -> getApplicationSupportDirectory(), result);
         break;
+      case "getDownloadsDirectory":
+        executeInBackground(() -> getDownloadsDirectory(), result);
       default:
         result.notImplemented();
     }
@@ -120,6 +122,10 @@ public class PathProviderPlugin implements FlutterPlugin, MethodCallHandler {
 
   private String getApplicationSupportDirectory() {
     return PathUtils.getFilesDir(context);
+  }
+
+  private String getDownloadsDirectory() {
+    return PathUtils.getDownloadsDirectory();
   }
 
   private String getPathProviderApplicationDocumentsDirectory() {
